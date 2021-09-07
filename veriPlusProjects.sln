@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "veriPlusProjects", "veriPlusProjects\veriPlusProjects.csproj", "{ECB17C45-98CA-4CEB-8D8A-64861735151A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECB17C45-98CA-4CEB-8D8A-64861735151A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB17C45-98CA-4CEB-8D8A-64861735151A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB17C45-98CA-4CEB-8D8A-64861735151A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB17C45-98CA-4CEB-8D8A-64861735151A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41691A5A-E1C8-4CF2-BC06-F2D4A137EFE5}
+	EndGlobalSection
+EndGlobal
