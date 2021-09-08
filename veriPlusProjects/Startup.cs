@@ -33,6 +33,7 @@ namespace veriPlusProjects
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+            Extensions.RunCurrency.StartThread();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

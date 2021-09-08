@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,8 @@ namespace veriPlusProjects.Extensions
     {
         //Currency currency;
         //DateTime endDate = DateTime.Now.AddDays(1).AddSeconds(-1);
-        static void GetCurrency()
+        //Timer GetTimer = new Timer();
+        static void GetCurrencyLive()
         {
             var ExcRate = "http://www.tcmb.gov.tr/kurlar/today.xml";
             XmlDocument Xml = new XmlDocument();
@@ -28,36 +30,50 @@ namespace veriPlusProjects.Extensions
             Currency.INSTALLATION_DATE = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59)).AddDays(1);
 
         }
-
         public static void CheckClock()
         {
-            DayOfWeek Dow = DateTime.Now.DayOfWeek;
-            //DateTime Hour = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59));
-            DateTime CheckHour = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59));
-            if (!(Dow == DayOfWeek.Saturday || Dow == DayOfWeek.Sunday))
+
+            do
             {
-                if (Currency.DATE.Hour == 0)
+                int Interval;
+                int MinRemaining = 59 - DateTime.Now.Minute;
+                int SecRemaining = 59 - DateTime.Now.Second;
+                Interval = ((MinRemaining * 60) + SecRemaining) * 1000;
+
+                do
                 {
-                    GetCurrency();
+                    if (Interval < 1)
+                        Interval = 120000;
                 }
-                else
+                while (Interval < 1);
+
+                DayOfWeek Dow = DateTime.Now.DayOfWeek;
+                DateTime CheckHour = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59));
+
+                if (!(Dow == DayOfWeek.Saturday || Dow == DayOfWeek.Sunday))
                 {
 
                     if (DateTime.Now > Currency.INSTALLATION_DATE && DateTime.Now > CheckHour)
                     {
-
-                        GetCurrency();
-                    }
-                    else
-                    {
-                        //varolan kur verisini göster.
+                        if (DateTime.Now.Hour == 9)
+                        {
+                            GetCurrencyLive();
+                        }
                     }
                 }
+                Thread.Sleep(Interval);
             }
-
+            while (true);
 
 
         }
+
+        public static void StartThread()
+        {
+            Thread _THREAD = new Thread(new ThreadStart(CheckClock));
+            _THREAD.Start();
+        }
+
 
     }
 }
