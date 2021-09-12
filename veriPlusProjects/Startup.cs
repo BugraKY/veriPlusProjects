@@ -42,8 +42,8 @@ namespace veriPlusProjects
 
             OmdbConf.ApiKey = OmdbConfigure.ApiKey;
             OmdbConf.BaseUrl = OmdbConfigure.BaseUrl;
-
             RunCurrency.StartThread();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,154 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model veriPlusProjects.Extensions.OmdbModel
+
+<div class="bg-dark text-white pb-3">
+    <div class="container bg-dark">
+        <div class="justify-content-center align-content-center d-flex">
+            <section id="movieElements">
+
+
+                <div class="row col-12">
+                    <div class="col-12">
+                        <span><strong style="font-size:xx-large">@Model.Title</strong></span>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="col-12">
+                        @Model.Year - @Model.Rated - @Model.Runtime
+                    </div>
+
+                </div>
+                <div class="row col-12">
+                    <div class="col-4">
+                        <img src="@Model.Poster" />
+                    </div>
+                    <div class="col-8">
+                        <div class="col-12">
+                            IMDB RATING: <strong><span style="font-size:x-large">@Model.imdbRating</span></strong>
+                        </div>
+                        <div class="col-12">
+                            <strong>@Model.Genre</strong>
+                        </div>
+                        <div class="pt-3">
+                            <div class="col-12">
+                                <strong>Language:</strong> @Model.Language
+                            </div>
+                            <div class="col-12">
+                                <strong>Country:</strong> @Model.Country
+                            </div>
+                        </div>
+
+                        <div class="pt-3">
+                            <div class="col-12">
+                                <strong>Director:</strong> @Model.Director
+                            </div>
+                            <div class="col-12">
+                                <strong>Writer:</strong> @Model.Writer
+                            </div>
+                            <div class="col-12">
+                                <strong>Stars:</strong> @Model.Actors
+                            </div>
+                        </div>
+
+                        <div class="pt-3">
+                            <div class="col-12">
+                                @Model.Plot
+                            </div>
+                        </div>
+
+                        <div class="row align-items-end">
+                            <div class="col">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-12">
+                        <div class="col-auto mr-auto">
+                            Awards: @Model.Awards
+                        </div>
+                        <div class="col-auto">
+                            <span style="right:0">
+                                Metascore: <strong>@Model.Metascore</strong>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        window.onload = (event) => {
+            console.log("arama işlemi enter = ", '@Model.Title');
+            document.getElementById("search").value = '@Model.Title';
+
+
+    };
+    @*
+    window.onload = (event) => {
+        console.log("arama işlemi enter = ", '@Model.Title');
+
+        $.ajax({
+            url: '/Home/MovieSearching',
+            type: 'POST',
+            dataSrc: "",
+            data: {
+                search: '@Model.Title'
+            },
+            success: function (data) {
+                console.log("Geri dönen veri: ", data);
+
+
+                $("#movieElements").empty();
+
+                $("#movieElements").append(data);
+                console.log(data);
+                document.getElementById("search").value = '@Model.Title';
+
+            },
+
+        });
+
+
+
+    };*@
+
+    @*
+    $("#search").on('keyup', function (e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            var searchVal = $("#search").val();
+            console.log("arama işlemi enter = ", searchVal);
+
+            $.ajax({
+                url: 'search',
+                type: 'GET',
+                dataSrc: "",
+                data: {
+                    search: searchVal
+                },
+                success: function (data) {
+                    console.log("Geri dönen veri: ", data);
+
+
+                    $("#movieElements").empty();
+
+                    $("#movieElements").append(data);
+
+                },
+
+            });
+
+
+        }
+    });*@
+</script>

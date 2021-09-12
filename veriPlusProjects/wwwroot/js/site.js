@@ -44,6 +44,7 @@ $.ajax({
     }
 });
 
+
 $("#search").on('keyup', function (e) {
     if (e.key === 'Enter' || e.keyCode === 13) {
         var searchVal = $("#search").val();
@@ -71,3 +72,33 @@ $("#search").on('keyup', function (e) {
 
     }
 });
+
+
+/*
+$("#search").on('keyup', function (e) {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        var searchVal = $("#search").val();
+        console.log("arama işlemi enter = ", searchVal);
+
+        $.ajax({
+            url: 'search',
+            type: 'GET',
+            dataSrc: "",
+            data: {
+                search: searchVal
+            },
+            success: function (data) {
+                console.log("Geri dönen veri: ", data);
+
+
+                $("#movieElements").empty();
+
+                $("#movieElements").append(data);
+
+            },
+
+        });
+
+
+    }
+});*/

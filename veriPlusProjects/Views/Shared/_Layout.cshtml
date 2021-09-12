@@ -9,11 +9,12 @@
     <style>
         .curr {
             font-size: larger;
-            font-weight:500;
+            font-weight: 500;
         }
+
         .bg-custom {
             background-color: #053575;
-            color:white;
+            color: white;
         }
     </style>
 </head>
@@ -48,10 +49,13 @@
                                 <label for="search" class="font-weight-bold" style="font-size:large;">Sinema:</label>
                             </div>
                             <div class="col-9">
-                                <input type="search" name="search" id="search" class="form-control" placeholder="Ara" aria-label="Search" form="" />
+                                <form action="/" method="get">
+                                    <input type="search" name="search" id="search" class="form-control" placeholder="Ara" aria-label="Search"/>
+
+                                </form>
                             </div>
                         </div>
-  
+
                     </div>
                 </div>
 
@@ -80,11 +84,10 @@
         </nav>
 
     </header>
-    <div class="container">
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
