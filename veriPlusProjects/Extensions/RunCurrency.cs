@@ -13,6 +13,7 @@ namespace veriPlusProjects.Extensions
         //Currency currency;
         //DateTime endDate = DateTime.Now.AddDays(1).AddSeconds(-1);
         //Timer GetTimer = new Timer();
+        static DayOfWeek Dow;
         static void GetCurrencyLive()
         {
             var ExcRate = "http://www.tcmb.gov.tr/kurlar/today.xml";
@@ -26,13 +27,23 @@ namespace veriPlusProjects.Extensions
             Currency.USD = Usd;
             Currency.EUR = Eur;
             Currency.GBP = Gbp;
-            Currency.DATE = DateTime.Now;
             Currency.INSTALLATION_DATE = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59)).AddDays(1);
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
+            {
+                Currency.DATE = DateTime.Now.Date.Add(new TimeSpan(9, 0, 0)).AddDays(-1);
+                Currency.INSTALLATION_DATE = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59)).AddDays(2);
+            } 
+            else if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+                Currency.DATE = DateTime.Now.Date.Add(new TimeSpan(9, 0, 0)).AddDays(-2);
+            else
+                Currency.DATE = DateTime.Now;
+
+
 
         }
         public static void CheckClock()
         {
-
+            
             do
             {
                 int Interval;
@@ -47,8 +58,14 @@ namespace veriPlusProjects.Extensions
                 }
                 while (Interval < 1);
 
-                DayOfWeek Dow = DateTime.Now.DayOfWeek;
+                Dow = DateTime.Now.DayOfWeek;
                 DateTime CheckHour = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59));
+
+                if (Currency.NonFirstSooh == false)
+                {
+                    Currency.NonFirstSooh = true;
+                    GetCurrencyLive();
+                }
 
                 if (!(Dow == DayOfWeek.Saturday || Dow == DayOfWeek.Sunday))
                 {

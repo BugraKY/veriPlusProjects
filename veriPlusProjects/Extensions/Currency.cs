@@ -12,5 +12,6 @@ namespace veriPlusProjects.Extensions
         public static string GBP { get; set; }
         public static DateTime DATE { get; set; }
         public static DateTime INSTALLATION_DATE { get; set; }
+        public static bool NonFirstSooh { get; set; }
     }
 }

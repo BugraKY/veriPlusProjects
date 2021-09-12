@@ -6,6 +6,16 @@
     <title>@ViewData["Title"] - veriPlusProjects</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .curr {
+            font-size: larger;
+            font-weight:500;
+        }
+        .bg-custom {
+            background-color: #053575;
+            color:white;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -28,9 +38,47 @@
                             <a class="nav-link text-dark" asp-controller="Movie" asp-action="Index">Sinema Dünyası</a>
                         </li>
                     </ul>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="search" class="font-weight-bold" style="font-size:large;">Sinema:</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="search" name="search" id="search" class="form-control" placeholder="Ara" aria-label="Search" form="" />
+                            </div>
+                        </div>
+  
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-custom border-bottom box-shadow mb-3">
+            <div class="container">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-4">
+                            <strong style="color:#d5d5d5">DOLAR:</strong>
+                            <span id="usd" class="curr"></span>
+                        </div>
+                        <div class="col-4">
+                            <strong style="color:#d5d5d5">EURO:</strong>
+                            <span id="eur" class="curr"></span>
+                        </div>
+                        <div class="col-4">
+                            <strong style="color:#d5d5d5">STERLİN:</strong>
+                            <span id="gbp" class="curr"></span>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
