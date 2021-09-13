@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace veriPlusProjects.Controllers
     {
         public string _search;
         private readonly IHttpClientFactory _clientFactory;
+        List<string> SearchList;
+
 
         public HomeController(IHttpClientFactory clientFactory)
         {
@@ -69,6 +72,27 @@ namespace veriPlusProjects.Controllers
                 var Url = OmdbConf.BaseUrl + Search + "&apikey=" + OmdbConf.ApiKey;
                 var JsonClient = new WebClient().DownloadString(Url);
                 var OmdbModel = JsonConvert.DeserializeObject<OmdbModel>(JsonClient);*/
+
+                /*
+                CookieOptions Cookie = new CookieOptions();
+                Cookie.Expires = DateTime.Now.AddDays(90);*/
+
+                //SearchList = new List<string>();
+                for(int i = 0; i < 5;i++)
+                {
+                    var val = Request.Cookies["search"+i];
+                    if (val != null)
+                        SearchList[i] = val;
+                }
+
+               /*
+                for (int i = 0; i < 5; i++)
+                {
+                    Response.Cookies.Append("search_" + i, Search);
+                }*/
+
+
+                
                 TestModel testModel = new TestModel();
                 var OmdbTestModel = new OmdbModel()
                 {
@@ -102,7 +126,14 @@ namespace veriPlusProjects.Controllers
             }
 
         }
-
+        public void DeleteSearchCookies()
+        {
+            Response.Cookies.Delete("search_0");
+            Response.Cookies.Delete("search_1");
+            Response.Cookies.Delete("search_2");
+            Response.Cookies.Delete("search_3");
+            Response.Cookies.Delete("search_4");
+        }
         public class TestModel
         {
             public string Title = "Star Wars";

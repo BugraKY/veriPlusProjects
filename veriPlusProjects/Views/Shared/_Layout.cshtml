@@ -51,7 +51,6 @@
                             <div class="col-9">
                                 <form action="/" method="get">
                                     <input type="search" name="search" id="search" class="form-control" placeholder="Ara" aria-label="Search"/>
-
                                 </form>
                             </div>
                         </div>
@@ -102,3 +101,7 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+<script>
+    $("#search").ajaxComplete();
+</script>
