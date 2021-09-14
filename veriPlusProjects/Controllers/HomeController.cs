@@ -63,6 +63,13 @@ namespace veriPlusProjects.Controllers
         [HttpGet]
         public IActionResult Index(string Search)
         {
+            int CountingSearch = 0;
+
+            if (Request.Cookies["CountingSeach"] == null)
+                Response.Cookies.Append("CountingSeach", CountingSearch.ToString());
+            else
+                CountingSearch =  Convert.ToInt32(Request.Cookies["CountingSeach"]);
+
             if (string.IsNullOrWhiteSpace(Search))
                 return View("Index");
             else
@@ -83,9 +90,13 @@ namespace veriPlusProjects.Controllers
                 if (Request.Cookies.Count < 6)
                     Response.Cookies.Append("search_0", Search);
                 else if(Request.Cookies.Count < 7)*/
+                
 
-                for (int i = 0; i < Request.Cookies.Count - 4; i++)
+                for (int i = 0; i < CountingSearch + 1; i++)
                 {
+                    if (CountingSearch < 5)
+                        Response.Cookies.Append("CountingSeach", (i+1).ToString());
+
                     var val = Request.Cookies["search_" + i.ToString()];
                     if (val != null)
                         SearchList[i] = val;
@@ -106,9 +117,7 @@ namespace veriPlusProjects.Controllers
                             Response.Cookies.Append("search_" + 4, Search);
                             SearchList[4] = Search;
                         }
-
                     }
-
                 }
                 TestModel testModel = new TestModel();
 
