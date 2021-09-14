@@ -16,8 +16,7 @@ namespace veriPlusProjects.Controllers
     {
         public string _search;
         private readonly IHttpClientFactory _clientFactory;
-        List<string> SearchList;
-
+        string[] SearchList = new string[5];
 
         public HomeController(IHttpClientFactory clientFactory)
         {
@@ -25,6 +24,7 @@ namespace veriPlusProjects.Controllers
         }
         public IActionResult Index()
         {
+            DeleteSearchCookies();
             return View();
         }
 
@@ -78,22 +78,48 @@ namespace veriPlusProjects.Controllers
                 Cookie.Expires = DateTime.Now.AddDays(90);*/
 
                 //SearchList = new List<string>();
-                for(int i = 0; i < 5;i++)
+                //DeleteSearchCookies();
+                /*
+                if (Request.Cookies.Count < 6)
+                    Response.Cookies.Append("search_0", Search);
+                else if(Request.Cookies.Count < 7)*/
+
+                for (int i = 0; i < Request.Cookies.Count - 4; i++)
                 {
-                    var val = Request.Cookies["search"+i];
+                    var val = Request.Cookies["search_" + i.ToString()];
                     if (val != null)
                         SearchList[i] = val;
+                    else
+                    {
+                        if (SearchList[4]== null)
+                        {
+                            Response.Cookies.Append("search_" + i.ToString(), Search);
+                            SearchList[i] = Search;
+                        }
+                        else
+                        {
+                            for (int x = 0; x < 4; x++)
+                            {
+                                SearchList[x] = SearchList[x + 1];
+                                Response.Cookies.Append("search_" + (x).ToString(), SearchList[x+1]);
+                            }
+                            Response.Cookies.Append("search_" + 4, Search);
+                            SearchList[4] = Search;
+                        }
+
+                    }
+
                 }
-
-               /*
-                for (int i = 0; i < 5; i++)
-                {
-                    Response.Cookies.Append("search_" + i, Search);
-                }*/
-
-
-                
                 TestModel testModel = new TestModel();
+
+                var SearchCookiesVM = new SearchCookies()
+                {
+                    Search_0 = SearchList[0],
+                    Search_1 = SearchList[1],
+                    Search_2 = SearchList[2],
+                    Search_3 = SearchList[3],
+                    Search_4 = SearchList[4]
+                };
                 var OmdbTestModel = new OmdbModel()
                 {
                     Actors = testModel.Actors,
@@ -122,6 +148,8 @@ namespace veriPlusProjects.Controllers
                     Writer = testModel.Writer,
                     Year = testModel.Year
                 };
+                OmdbTestModel.Searches = SearchCookiesVM;
+
                 return View("Search", OmdbTestModel);
             }
 

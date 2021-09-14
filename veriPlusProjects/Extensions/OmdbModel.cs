@@ -22,6 +22,7 @@ namespace veriPlusProjects.Extensions
         public string Awards { get; set; }
         public string Poster { get; set; }
         public List<OmdbRatings> Ratings { get; set; }
+        public SearchCookies Searches { get; set; }
         public int Metascore { get; set; }
         public double imdbRating { get; set; }
         public string imdbVotes { get; set; }
