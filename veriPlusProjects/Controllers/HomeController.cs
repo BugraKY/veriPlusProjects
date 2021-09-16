@@ -12,7 +12,6 @@ namespace veriPlusProjects.Controllers
         public List<string> StringList { get; set; }
         public IActionResult Index()
         {
-            DeleteSearchCookies();
             return View();
         }
 

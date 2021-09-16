@@ -35,32 +35,3 @@ $.ajax({
         console.log(e);
     }
 });
-
-
-$("#search").on('keyup', function (e) {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-        var searchVal = $("#search").val();
-        console.log("arama işlemi enter = ", searchVal);
-
-        $.ajax({
-            url: '/Home/MovieSearching',
-            type: 'GET',
-            dataSrc: "",
-            data: {
-                search: searchVal
-            },
-            success: function (data) {
-                console.log("Geri dönen veri: ", data);
-
-
-                $("#movieElements").empty();
-
-                $("#movieElements").append(data);
-
-            },
-           
-        });
-
-
-    }
-});
