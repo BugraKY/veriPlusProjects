@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,10 +34,7 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="ExchangeRate" asp-action="Index">Kur</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Movie" asp-action="Index">Sinema Dünyası</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="DeleteSearchCookies">Arama Geçmişini Temizle</a>
                         </li>
                     </ul>
 
@@ -50,7 +48,10 @@
                             </div>
                             <div class="col-9">
                                 <form action="/" method="get">
-                                    <input type="search" name="search" id="search" class="form-control" placeholder="Ara" aria-label="Search"/>
+                                    <input type="search" name="search" id="search" class="form-control" placeholder="Ara" aria-label="Search" list="searchdata" autocomplete="off" />
+                                    <datalist id="searchdata">
+                                        <partial name="_SearchPartial" />
+                                    </datalist>
                                 </form>
                             </div>
                         </div>

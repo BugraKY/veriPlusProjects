@@ -1,0 +1,9 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+
+    for (int i = Convert.ToInt32(HttpContextAccessor.HttpContext.Request.Cookies["CountingSeach"]); i >= 0; i--)
+    {
+        <option>@HttpContextAccessor.HttpContext.Request.Cookies["search_" + i]</option>
+    }
+}

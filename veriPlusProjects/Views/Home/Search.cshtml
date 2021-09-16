@@ -1,39 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model veriPlusProjects.Extensions.OmdbModel
+﻿@model veriPlusProjects.Extensions.OmdbModel
 
 <div class="bg-dark text-white pb-3">
     <div class="container bg-dark">
         <div class="justify-content-center align-content-center d-flex">
             <section id="movieElements">
 
-
-                    <div class="row col-12">
-                        @Model.Searches.Search_0
+                @if (Model.Title == null)
+                {
+                    <div class="d-flex justify-content-center align-content-center">
+                        <label><strong>Nothing was found as a result search from OMDB.</strong></label>
                     </div>
-                    <div class="row col-12">
-                        @Model.Searches.Search_1
-                    </div>
-                    <div class="row col-12">
-                        @Model.Searches.Search_2
-                    </div>
-                    <div class="row col-12">
-                        @Model.Searches.Search_3
-                    </div>
-                    <div class="row col-12">
-                        @Model.Searches.Search_4
-                    </div>
-
-
-
-
-
-
-
-                @*
+                }
+                else
+                {
                     <div class="row col-12">
                         <div class="col-12">
                             <span><strong style="font-size:xx-large">@Model.Title</strong></span>
@@ -41,7 +20,19 @@
                     </div>
                     <div class="row col-12">
                         <div class="col-12">
-                            @Model.Year - @Model.Rated - @Model.Runtime
+                            @if (Model.Year != null)
+                            {
+                                <span>@Model.Year</span>
+                            }
+                            @if (@Model.Rated != null)
+                            {
+                                <span>- @Model.Rated</span>
+                            }
+                            @if (Model.Runtime != null)
+                            {
+                                <span>- @Model.Runtime</span>
+                            }
+
                         </div>
 
                     </div>
@@ -102,7 +93,9 @@
                         </div>
 
                     </div>
-                *@
+
+                }
+
 
             </section>
         </div>
@@ -110,13 +103,19 @@
 </div>
 
 <script>
-    @*
-        window.onload = (event) => {
-            console.log("arama işlemi enter = ", '@Model.Title');
-            document.getElementById("search").value = '@Model.Title';
 
+    window.onload = (event) => {
+        $("#searchdata").empty();
 
-    };*@
+        var searchList = @Html.Raw(Json.Serialize(Model.StringList));
+        console.log("Data: '/n'" + searchList);
+
+        var options = '';
+        for (var i =@Html.Raw(Json.Serialize(Model.CountingSeach - 1)); i >= 0; i--) {
+            options += '<option value="' + searchList[i] + '" />';
+        }
+        document.getElementById('searchdata').innerHTML = options;
+    };
     @*
     window.onload = (event) => {
         console.log("arama işlemi enter = ", '@Model.Title');

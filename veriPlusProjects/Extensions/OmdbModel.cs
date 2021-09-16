@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace veriPlusProjects.Extensions
 {
@@ -10,7 +7,7 @@ namespace veriPlusProjects.Extensions
         public string Title { get; set; }
         public string Year { get; set; }
         public string Rated { get; set; }
-        public DateTime Released { get; set; }
+        public string Released { get; set; }
         public string Runtime { get; set; }
         public string Genre { get; set; }
         public string Director { get; set; }
@@ -22,16 +19,19 @@ namespace veriPlusProjects.Extensions
         public string Awards { get; set; }
         public string Poster { get; set; }
         public List<OmdbRatings> Ratings { get; set; }
-        public SearchCookies Searches { get; set; }
-        public int Metascore { get; set; }
-        public double imdbRating { get; set; }
+        public string Metascore { get; set; }
+        public string imdbRating { get; set; }
         public string imdbVotes { get; set; }
         public string imdbID { get; set; }
         public string Type { get; set; }
-        public DateTime DVD { get; set; }
+        public string DVD { get; set; }
         public string BoxOffice { get; set; }
         public string Production { get; set; }
         public string Website { get; set; }
         public bool Response { get; set; }
+
+        public string Search { get; set; }
+        public List<string> StringList { get; set; }
+        public int CountingSeach { get; set; }
     }
 }

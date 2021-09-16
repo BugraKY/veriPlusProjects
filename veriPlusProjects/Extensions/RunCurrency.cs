@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
-using Microsoft.AspNetCore.Mvc;
 
 namespace veriPlusProjects.Extensions
 {
     public class RunCurrency
     {
-        //Currency currency;
-        //DateTime endDate = DateTime.Now.AddDays(1).AddSeconds(-1);
-        //Timer GetTimer = new Timer();
+
         static DayOfWeek Dow;
         static void GetCurrencyLive()
         {
@@ -32,18 +26,16 @@ namespace veriPlusProjects.Extensions
             {
                 Currency.DATE = DateTime.Now.Date.Add(new TimeSpan(9, 0, 0)).AddDays(-1);
                 Currency.INSTALLATION_DATE = DateTime.Now.Date.Add(new TimeSpan(8, 59, 59)).AddDays(2);
-            } 
+            }
             else if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
                 Currency.DATE = DateTime.Now.Date.Add(new TimeSpan(9, 0, 0)).AddDays(-2);
             else
                 Currency.DATE = DateTime.Now;
 
-
-
         }
         public static void CheckClock()
         {
-            
+
             do
             {
                 int Interval;
@@ -66,7 +58,6 @@ namespace veriPlusProjects.Extensions
                     Currency.NonFirstSooh = true;
                     GetCurrencyLive();
                 }
-
                 if (!(Dow == DayOfWeek.Saturday || Dow == DayOfWeek.Sunday))
                 {
 
@@ -81,10 +72,7 @@ namespace veriPlusProjects.Extensions
                 Thread.Sleep(Interval);
             }
             while (true);
-
-
         }
-
         public static void StartThread()
         {
             Thread _THREAD = new Thread(new ThreadStart(CheckClock));
